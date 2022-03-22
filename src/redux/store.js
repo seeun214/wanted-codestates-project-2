@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import userDataReducer from './reducers/userDataReducer';
+import matchDetailReducer from './reducers/matchDetailReducer';
+import matchListReducer from './reducers/matchListReducer';
 
 export const store = configureStore({
   reducer: {
-    data: userDataReducer,
+    matchList: matchListReducer,
+    matchDetail: matchDetailReducer,
   },
 });

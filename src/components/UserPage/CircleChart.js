@@ -26,7 +26,7 @@ const CircleChart = ({ percent, color }) => {
 
   useEffect(() => {
     makeChart(percent, color);
-  }, []);
+  }, [percent, color]);
 
   return (
     <Circle ref={chart}>
@@ -43,10 +43,8 @@ const Circle = styled.div`
   margin: 20px auto;
   width: 83px;
   height: 83px;
-  background-color: #ebebeb;
   border-radius: 50%;
   position: relative;
-  border-radius: 50%;
   transition: 0.3s;
 `;
 
@@ -71,5 +69,6 @@ const Percent = styled.span`
   transform: translateX(-50%);
   margin-top: -20px;
   font-size: 20px;
+  font-weight: 700;
   color: ${(props) => props.color};
 `;
