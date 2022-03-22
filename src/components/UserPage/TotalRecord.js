@@ -14,15 +14,15 @@ const TotalRecord = () => {
       </Title>
       <Section>
         <Chart>
-          <p>승률</p>
+          승률
           <CircleChart color="#9bd728" percent={50} />
         </Chart>
         <Chart>
-          <p>완주율</p>
-          <CircleChart color="#07f" percent={70} />
+          완주율
+          <CircleChart color="#07f" percent={50} />
         </Chart>
         <Chart>
-          <p>리타이어율</p>
+          리타이어율
           <CircleChart color="#f62459" percent={30} />
         </Chart>
       </Section>

@@ -11,9 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { ActionButton, TeamSelectButton } from '../../styles/styles';
 
-const Profile = () => {
-  const character =
-    '42c729e64e31aea803e4881432f7b95129ce97535c29e4f9a72919a9f267b418';
+const Profile = ({ nickName, character, matchType, setMatchType }) => {
   return (
     <Container>
       <ProfileWrap>
@@ -25,7 +23,7 @@ const Profile = () => {
         </User>
         <Name>
           <h1>
-            BBEESSTT
+            {nickName}
             <img
               alt="license"
               src="https://tmi.nexon.com/img/icon_l3.png"

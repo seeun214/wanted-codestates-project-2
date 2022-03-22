@@ -1,9 +1,10 @@
 import styled from '@emotion/styled';
-import React from 'react';
+import React, { useState } from 'react';
 import logo from '../assets/logo_kart.png';
 import tmiLogo from '../assets/tmi_logo_default_b.svg';
 import { Link } from 'react-router-dom';
 import Search from './Search';
+import { useSelector } from 'react-redux';
 
 const Header = () => {
   return (
