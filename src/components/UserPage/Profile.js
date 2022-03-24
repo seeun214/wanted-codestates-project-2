@@ -4,12 +4,11 @@ import {
   faEye,
   faRedo,
   faShareAlt,
-  faUser,
-  faUsers,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import { ActionButton, TeamSelectButton } from '../../styles/styles';
+import { ActionButton } from '../../styles/styles';
+import TeamSelectButton from '../TeamSelectButton';
 
 const Profile = ({ nickName, character, matchType, setMatchType }) => {
   return (
@@ -29,27 +28,8 @@ const Profile = ({ nickName, character, matchType, setMatchType }) => {
               src="https://tmi.nexon.com/img/icon_l3.png"
             ></img>
           </h1>
-          {/* border-width: 0.7px 0 0.7px 0.7px; border-radius: 5px 0 0 5px;
-          border-width: 0.7px 0.7px 0.7px 0.7px; border-radius: 0 5px 5px 0; */}
           <TeamSelect>
-            <TeamSelectButton
-              borderWidth={'0.7px 0 0.7px 0.7px'}
-              borderRadius={'5px 0 0 5px'}
-            >
-              <a data-v-749ad536="" href="javascript:;" title="스피드개인전">
-                <FontAwesomeIcon icon={faUser} />
-                개인전
-              </a>
-            </TeamSelectButton>
-            <TeamSelectButton
-              borderWidth={'0.7px 0.7px 0.7px 0.7px'}
-              borderRadius={'0 5px 5px 0'}
-            >
-              <a data-v-749ad536="" href="javascript:;" title="스피드팀전">
-                <FontAwesomeIcon icon={faUsers} />
-                팀전
-              </a>
-            </TeamSelectButton>
+            <TeamSelectButton />
           </TeamSelect>
           <UserAction>
             <ActionButton>

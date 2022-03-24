@@ -10,20 +10,33 @@ export const ContentBox = styled.div`
   margin-right: ${(props) => (props.marginRight ? 0 : '10px')};
 `;
 
-export const TeamSelectButton = styled.button`
+export const RankerContent = styled.div`
+  position: relative;
+  display: inline-block;
+  flex: 1;
+  height: 250px;
+  background-color: #fff;
+  border-radius: 10px;
+  margin-right: 42px;
+  -webkit-box-shadow: 5px 5px 5px -5px rgb(0 0 0 / 21%);
+  box-shadow: 5px 5px 5px -5px rgb(0 0 0 / 21%);
+`;
+
+export const SelectButton = styled.button`
   border-width: ${(props) => props.borderWidth};
   border-radius: ${(props) => props.borderRadius};
   vertical-align: middle;
   display: inline-block;
   margin-top: 20px;
-  width: 100px;
-  height: 25px;
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
   line-height: 25px;
   font-size: 12px;
   font-weight: 400;
   text-align: center;
   border-style: solid;
   border-color: #07f;
+  border-color: ${(props) => (props.color ? props.color : '#07f')};
   background: transparent;
 `;
 

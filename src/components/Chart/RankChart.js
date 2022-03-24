@@ -1,3 +1,4 @@
+import styled from '@emotion/styled';
 import React from 'react';
 import {
   LineChart,
@@ -6,8 +7,6 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
-  ResponsiveContainer,
 } from 'recharts';
 
 const RankChart = ({ data }) => {
@@ -47,12 +46,24 @@ const RankChart = ({ data }) => {
         <Line
           type="monotone"
           dataKey="rank"
+          strokeWidth="1"
           stroke="#07f"
-          activeDot={{ r: 8 }}
+          fill="#07f"
+          dot={{ strokeWidth: 1, r: 2 }}
+          animationDuration="0"
         />
       </LineChart>
+      <CustomizedDot />
     </div>
   );
 };
 
 export default RankChart;
+
+export const CustomizedDot = styled.div`
+  z-index: 99;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background-color: #07f;
+`;
