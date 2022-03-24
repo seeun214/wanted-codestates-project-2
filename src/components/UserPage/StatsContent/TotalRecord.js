@@ -1,29 +1,40 @@
 import styled from '@emotion/styled';
 import React from 'react';
-import { ContentBox } from '../../styles/styles';
-import CircleChart from './CircleChart';
+import { ContentBox } from '../../../styles/styles';
+import CircleChart from '../../Chart/CircleChart';
 
-const TotalRecord = () => {
+const TotalRecord = ({ data }) => {
+  let win, retire, total, complete, winRate, completionRate, retireRate;
+  if (data) {
+    win = data.filter((el) => el.matchWin === '1').length;
+    retire = data.filter((el) => el.matchRetired !== '0').length;
+    total = data.length;
+    complete = total - retire;
+    winRate = Math.round((win / total) * 100, 0);
+    completionRate = Math.round((complete / total) * 100, 0);
+    retireRate = Math.round((retire / total) * 100, 0);
+  }
+
   return (
     <ContentBox>
       <Title>
         <BlueText>종합</BlueText>전적
         <Summary>
-          {/* {total}전 {win}승 {total - win}패 */}40전 22승 18패
+          {total}전 {win}승 {total - win}패
         </Summary>
       </Title>
       <Section>
         <Chart>
           승률
-          <CircleChart color="#9bd728" percent={50} />
+          <CircleChart color="#07f" percent={winRate} />
         </Chart>
         <Chart>
           완주율
-          <CircleChart color="#07f" percent={50} />
+          <CircleChart color="#9bd728" percent={completionRate} />
         </Chart>
         <Chart>
           리타이어율
-          <CircleChart color="#f62459" percent={30} />
+          <CircleChart color="#f62459" percent={retireRate} />
         </Chart>
       </Section>
       <Bottom>
