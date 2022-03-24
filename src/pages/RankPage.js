@@ -1,24 +1,32 @@
 import styled from '@emotion/styled';
 import React from 'react';
+import TopContent from '../components/RankPage/TopContent';
+import TopRanker from '../components/RankPage/TopRanker';
 
 const RankPage = () => {
   return (
-    <>
-      <RankContainer>
-        <CotentWrap>
-          <TopContent>
-            <PageName>3월 TMI 랭킹</PageName>
-            <Line></Line>
-          </TopContent>
-        </CotentWrap>
-      </RankContainer>
-    </>
+    <Container>
+      <CotentWrap>
+        <TopContent />
+        <TopRank>
+          <TopRanker
+            medalImg={'https://tmi.nexon.com/img/assets/icon_goldmedal.png'}
+          />
+          <TopRanker
+            medalImg={'https://tmi.nexon.com/img/assets/icon_silvermedal.png'}
+          />
+          <TopRanker
+            medalImg={'https://tmi.nexon.com/img/assets/icon_bronzemedal.png'}
+          />
+        </TopRank>
+      </CotentWrap>
+    </Container>
   );
 };
 
 export default RankPage;
 
-const RankContainer = styled.div`
+const Container = styled.div`
   position: relative;
   background-color: #fafafa;
   padding-bottom: 200px;
@@ -33,8 +41,11 @@ const CotentWrap = styled.div`
   overflow: hidden;
 `;
 
-const TopContent = styled.div``;
-
-const PageName = styled.div``;
-
-const Line = styled.div``;
+const TopRank = styled.div`
+  display: flex;
+  z-index: 5;
+  position: relative;
+  padding-top: 55px;
+  width: 1300px;
+  margin: 0 auto;
+`;

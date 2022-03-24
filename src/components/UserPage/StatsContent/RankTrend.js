@@ -29,10 +29,10 @@ const RankTrend = ({ data }) => {
 
   if (data) {
     data.map((el) => sumTotlaRank(el.matchRank));
-    totlaRank = sumRank / totlaRankLen;
+    totlaRank = (sumRank / totlaRankLen).toFixed(2);
 
     data.slice(0, 50).map((el) => sumLatelyRank(el.matchRank));
-    latelyRank = sumlatelyRank / latelyRankLen;
+    latelyRank = (sumlatelyRank / latelyRankLen).toFixed(2);
   }
 
   return (
@@ -64,4 +64,5 @@ const TextWrap = styled.span`
 const Blue = styled.span`
   color: #07f;
   margin-left: 5px;
+  font-weight: 500;
 `;
