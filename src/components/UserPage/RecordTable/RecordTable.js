@@ -4,30 +4,39 @@ import TrackChart from '../../Chart/TrackChart';
 import { BlueText } from '../StatsContent/TotalRecord';
 import TrackTable from './TrackTable';
 import TrackMetaData from '../../../assets/track.json';
-import { useDispatch, useSelector } from 'react-redux';
-import { getAllMatchList } from '../../../redux/reducers/allMatchListReducer';
 import KartThumnail from './KartThumnail';
 import KartTable from './KartTable';
 
 const RecordTable = ({ userMatchdata, matchType }) => {
   const [trackData, setTrackData] = useState();
   const [tabIndex, setTabIndex] = useState(1);
-  const { data, loading, error } = useSelector((state) => state.matchAllList);
-  const dispatch = useDispatch();
-  if (userMatchdata) {
-    const trackId = userMatchdata.map((el) => el.trackId);
-    // const track = trackId.map((trackId)=>{
-    //   TrackMetaData.map((el) => el.id === trackId);
-  }
+
   useEffect(() => {
-    dispatch(
-      getAllMatchList({
-        matchType,
-      }),
-    );
+    if (userMatchdata) {
+      const trackId = userMatchdata.map((el) => el.trackId);
+      const uniqueTrackId = [...new Set(trackId)];
+      const trackInfo = uniqueTrackId.map((trackId) => {
+        const trackList = userMatchdata.filter((el) => el.trackId === trackId);
+        const trackMatch = TrackMetaData.find((el) => el.id === trackId);
+        const number = trackList.length;
+        const win = trackList.filter(
+          (el) => el.trackId === trackId && el.matchWin === '1',
+        ).length;
+        const recordArray = trackList.map((el) => Number(el.matchTime));
+
+        return {
+          trackId,
+          trackName: trackMatch.name,
+          number,
+          win,
+          recordArray,
+        };
+      });
+      trackInfo.sort((a, b) => b.number - a.number);
+      setTrackData(trackInfo);
+    }
   }, [matchType]);
 
-  console.log(data);
   return (
     <Container>
       <TabBox>
@@ -64,7 +73,11 @@ const RecordTable = ({ userMatchdata, matchType }) => {
           {tabIndex === 1 ? <TrackChart /> : <KartThumnail />}
         </GraphWrap>
         <TableWrapper>
-          {tabIndex === 1 ? <TrackTable /> : <KartTable />}
+          {tabIndex === 1 ? (
+            <TrackTable trackData={trackData} />
+          ) : (
+            <KartTable />
+          )}
         </TableWrapper>
       </TableWrap>
     </Container>

@@ -35,14 +35,14 @@ const Comment = () => {
             type="text"
             placeholder="닉네임"
             maxlength="5"
-            class="nick"
+            className="nick"
             inputType={'nick'}
           />
           <Input
             type="text"
             placeholder="최대 30자"
             maxlength="30"
-            class="chat"
+            className="chat"
           />
           <Button>남기기</Button>
         </InputMessage>

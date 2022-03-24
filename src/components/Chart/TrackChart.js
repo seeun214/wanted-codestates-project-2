@@ -75,9 +75,6 @@ const Container = styled.div`
   width: 278px;
   height: 178.5px;
 `;
-const ChartWrap = styled.p`
-  margin: 10px 20px 10px -40px;
-`;
 const Title = styled.div`
   font-size: 14px;
   display: flex;
@@ -86,4 +83,8 @@ const Title = styled.div`
 const GrayText = styled.p`
   margin-left: 10px;
   color: #a1a1a1;
+`;
+
+const ChartWrap = styled.div`
+  margin: 10px 20px 10px -40px;
 `;
