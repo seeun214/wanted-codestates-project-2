@@ -1,32 +1,47 @@
 import styled from '@emotion/styled';
 import React from 'react';
+import TrackMetaData from '../../../assets/track.json';
+import KartMetaData from '../../../assets/kart.json';
+import timeForToday from '../../../api/timeForToday';
 
-const RecordList = () => {
-  return (
+const RecordList = ({ data }) => {
+  let trackName, KartName;
+
+  if (data) {
+    trackName = TrackMetaData.find((el) => el.id === data.trackId);
+    KartName = KartMetaData.find((el) => el.id === data.kart);
+  }
+
+  return data.matchRank ? (
     <ListContainer>
-      <Section>
-        <Type>15시간 전</Type>
-        <Result>
-          #1
-          <Total>/ 8</Total>
-        </Result>
-        <Track> 1920 아슬아슬 비행장</Track>
-        <Kart>몬스터 X LE</Kart>
-        <Time> 2'28'56</Time>
+      <Section win={data.matchRank} retire={data.matchRetired}>
+        <Type>{timeForToday(data.endTime)}</Type>
+        {data.matchRetired === '1' ? (
+          <Result win={data.matchRank} retire={data.matchRetired}>
+            #리타이어
+          </Result>
+        ) : (
+          <Result win={data.matchRank}>
+            # {data.matchRank}
+            <Total>/ {data.playerCount}</Total>
+          </Result>
+        )}
+
+        <Track>{trackName.name}</Track>
+        <Kart>{KartName.name}</Kart>
+        <Time> {data.matchRetired === '1' ? '-' : data.matchTime}</Time>
         <Open>
           <Triangle></Triangle>
         </Open>
       </Section>
     </ListContainer>
-  );
+  ) : null;
 };
 
 export default RecordList;
 
 const ListContainer = styled.div`
   width: 660px;
-  margin-left: 10px;
-  margin-top: 40px;
 `;
 const Section = styled.div`
   position: relative;
@@ -36,10 +51,17 @@ const Section = styled.div`
   width: 100%;
   height: 88px;
   font-size: 16px;
-  background-color: #fff;
+  background-color: ${(props) =>
+    props.win === '1' ? '#F0F3FA;' : props.retire === '1' ? '#F9F0F2' : '#fff'};
   border-width: 1px 1px 1px 4px;
-  border-color: #f2f2f2 #f2f2f2 #f2f2f2 #a1a1a1;
+  border-color: ${(props) =>
+    props.win === '1'
+      ? '#f2f2f2 #f2f2f2 #f2f2f2 #07f;'
+      : props.retire === '1'
+      ? '#f2f2f2 #f2f2f2 #f2f2f2 #f62459;'
+      : '#f2f2f2 #f2f2f2 #f2f2f2 #a1a1a1;'};
   border-style: solid;
+  opacity: 1;
 `;
 const Type = styled.p`
   display: table-cell;
@@ -58,8 +80,10 @@ const Result = styled.p`
   font-size: 30px;
   font-weight: 500;
   font-style: italic;
-  color: #1f334a;
-  opacity: 0.5;
+  color: ${(props) =>
+    props.win === '1' ? '#07f' : props.retire === '1' ? '#f62459' : '#1f334a'};
+  opacity: ${(props) =>
+    (props.win === '1') | (props.retire === '1') ? '1' : '0.5;'};
 `;
 const Total = styled.span`
   margin-left: 10px;

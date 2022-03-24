@@ -11,7 +11,7 @@ import { ActionButton } from '../../styles/styles';
 import TeamSelectButton from '../TeamSelectButton';
 
 const Profile = ({ nickName, character, matchType, setMatchType }) => {
-  return (
+  return character ? (
     <Container>
       <ProfileWrap>
         <User>
@@ -47,14 +47,14 @@ const Profile = ({ nickName, character, matchType, setMatchType }) => {
           </UserAction>
         </Name>
         <Rank>
-          <p>
+          <Icon>
             <FontAwesomeIcon icon={faEye} /> 페이지뷰
-          </p>
-          <p>1,291</p>
+          </Icon>
+          <ViewCount>1,291</ViewCount>
         </Rank>
       </ProfileWrap>
     </Container>
-  );
+  ) : null;
 };
 
 export default Profile;
@@ -130,14 +130,15 @@ const Rank = styled.div`
   margin-top: -23.5px;
   color: #6c7a89;
   text-align: center;
+`;
 
-  p: nth-child(1) {
-    box-sizing: border-box;
-    padding: 0 10px;
-    font-size: 14px;
-    height: 19.5px;
-  }
-  p: nth-child(2) {
-    font-size: 20px;
-  }
+const Icon = styled.p`
+  box-sizing: border-box;
+  padding: 0 10px;
+  font-size: 14px;
+  height: 19.5px;
+`;
+
+const ViewCount = styled.p`
+  font-size: 20px;
 `;

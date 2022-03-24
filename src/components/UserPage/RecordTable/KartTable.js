@@ -4,34 +4,38 @@ import React from 'react';
 const KartTable = () => {
   return (
     <TableContainer>
-      <TableHead>
-        <Th>선택</Th>
-        <Th>카트</Th>
-        <Th>횟수</Th>
-        <Th>승률</Th>
-        <Th>리타율</Th>
-      </TableHead>
-      <TableBody>
-        <Td>
-          <input type="radio" value="id값" />
-        </Td>
-        <Td
-          style={{
-            textAlign: 'left',
-            paddingRight: '20px',
-          }}
-        >
-          <img
-            src="https://s3-ap-northeast-1.amazonaws.com/solution-userstats/kartimg/Category/brodi_1.png"
-            alt="트랙이미지"
-            height={27}
-          ></img>
-          브로디 비밀의 연구
-        </Td>
-        <Td>195</Td>
-        <Td>34%</Td>
-        <Td>8%</Td>
-      </TableBody>
+      <Table>
+        <TableHead>
+          <Th>선택</Th>
+          <Th>카트</Th>
+          <Th>횟수</Th>
+          <Th>승률</Th>
+          <Th>리타율</Th>
+        </TableHead>
+        <Tbody>
+          <Tr>
+            <Td>
+              <input type="radio" value="id값" />
+            </Td>
+            <Td
+              style={{
+                textAlign: 'left',
+                paddingRight: '20px',
+              }}
+            >
+              <img
+                src="https://s3-ap-northeast-1.amazonaws.com/solution-userstats/kartimg/Category/brodi_1.png"
+                alt="트랙이미지"
+                height={27}
+              ></img>
+              브로디 비밀의 연구
+            </Td>
+            <Td>195</Td>
+            <Td>34%</Td>
+            <Td>8%</Td>
+          </Tr>
+        </Tbody>
+      </Table>
     </TableContainer>
   );
 };
@@ -47,8 +51,9 @@ const TableContainer = styled.div`
   border-spacing: 0;
   table-layout: fixed;
 `;
+const Table = styled.table``;
 
-const TableHead = styled.tr`
+const TableHead = styled.thead`
   background-color: #fbfbfb;
   box-sizing: border-box;
   line-height: 35px;
@@ -69,7 +74,10 @@ const Th = styled.th`
     background-color: #ccc;
   }
 `;
-const TableBody = styled.tr`
+
+const Tbody = styled.tbody``;
+
+const Tr = styled.tr`
   box-sizing: border-box;
   width: 378px;
   line-height: 35px;

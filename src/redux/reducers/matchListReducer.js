@@ -35,14 +35,15 @@ export const matchListReducer = createSlice({
         userMatch: action.payload.data.matches[0].matches.map((match) => {
           characterCode.push(match.player.character);
           return {
-            // match,
             matchId: match.matchId,
             kart: match.player.kart,
             matchRank: match.player.matchRank,
             matchWin: match.player.matchWin,
             matchRetired: match.player.matchRetired,
             matchTime: match.player.matchTime,
+            endTime: match.endTime,
             trackId: match.trackId,
+            playerCount: match.playerCount,
           };
         }),
         nickName: action.payload.data.nickName,
