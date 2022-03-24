@@ -1,13 +1,30 @@
 import styled from '@emotion/styled';
-import React from 'react';
+import React, { useState } from 'react';
 
 const Tab = () => {
+  const [tabIndex, setTabIndex] = useState(1);
+
   return (
     <TabContainer>
       <TabBox>
-        <TabItem>통합</TabItem>
-        <TabItem>매우빠름</TabItem>
-        <TabItem>무한부스터</TabItem>
+        <TabItem
+          className={tabIndex === 1 ? 'clickedTab' : 'tab'}
+          onClick={() => setTabIndex(1)}
+        >
+          통합
+        </TabItem>
+        <TabItem
+          className={tabIndex === 2 ? 'clickedTab' : 'tab'}
+          onClick={() => setTabIndex(2)}
+        >
+          매우빠름
+        </TabItem>
+        <TabItem
+          className={tabIndex === 3 ? 'clickedTab' : 'tab'}
+          onClick={() => setTabIndex(3)}
+        >
+          무한부스터
+        </TabItem>
       </TabBox>
     </TabContainer>
   );
@@ -31,5 +48,13 @@ const TabItem = styled.li`
   text-align: center;
   padding: 10px;
   position: relative;
+  color: #a1a1a1;
   cursor: pointer;
+
+  :hover,
+  &.clickedTab {
+    color: #0077ff;
+    border-bottom: 2px solid #0077ff;
+    transform-origin: 0% 50%;
+  }
 `;

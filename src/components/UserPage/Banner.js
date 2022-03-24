@@ -3,15 +3,16 @@ import { faCalculator } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 
-const Banner = () => {
+const Banner = ({ nickName }) => {
+  const href = `https://tmi.nexon.com/simulator/${nickName}`;
   return (
     <Container>
-      1대1 매칭 시뮬레이터 - 'BBEESSTT' 와 가상 대결을 펼쳐보세요.
+      1대1 매칭 시뮬레이터 - '{nickName}' 와 가상 대결을 펼쳐보세요.
       <Matcing>
-        <a data-v-749ad536="" href="javascript:;">
+        <Href href={`${href}`}>
           <FontAwesomeIcon icon={faCalculator} />
           매칭하기
-        </a>
+        </Href>
       </Matcing>
     </Container>
   );
@@ -68,3 +69,5 @@ const Matcing = styled.span`
     margin-right: 5px;
   }
 `;
+
+const Href = styled.a``;

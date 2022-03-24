@@ -1,22 +1,20 @@
 import styled from '@emotion/styled';
 import React, { useEffect, useState } from 'react';
-import Profile from '../components/UserPage/Profile';
-import Banner from '../components/UserPage/Banner';
-import TotalRecord from '../components/UserPage/TotalRecord';
-import RankTrend from '../components/UserPage/RankTrend';
-import Comment from '../components/UserPage/Comment';
-import Tab from '../components/UserPage/Tab';
-import LeftInfo from '../components/UserPage/LeftInfo';
-import RightInfo from '../components/UserPage/RightInfo';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  getAllMatchList,
-  getUserMatchList,
-} from '../redux/reducers/matchListReducer';
+import { getUserMatchList } from '../redux/reducers/matchListReducer';
 import { useParams } from 'react-router-dom';
+import Profile from '../components/UserPage/Profile';
+import Banner from '../components/UserPage/Banner';
+import TotalRecord from '../components/UserPage/StatsContent/TotalRecord';
+import RankTrend from '../components/UserPage/StatsContent/RankTrend';
+import Comment from '../components/UserPage/StatsContent/Comment';
+import Tab from '../components/UserPage/Tab';
+import RecordTable from '../components/UserPage/RecordTable/RecordTable';
+import RecordList from '../components/UserPage/RecordList/RecordList';
 import Loading from '../components/Loading';
+import Footer from '../components/Footer';
 
 const UserPage = () => {
   const soloType =
@@ -44,8 +42,6 @@ const UserPage = () => {
 
   console.log('user Page');
   console.log(data.userMatch);
-  console.log(data.nickName);
-  console.log(data.character);
 
   return loading ? (
     <Loading />
@@ -57,21 +53,21 @@ const UserPage = () => {
           카트라이더 매치데이터는 최근 1년치 데이터만 확인할 수 있습니다.
         </Message>
         <Profile
-          nickName={data?.nickName}
-          character={data?.character}
+          nickName={data.nickName}
+          character={data.character}
           matchType={matchType}
           setMatchType={setMatchType}
         />
-        <Banner />
+        <Banner nickName={data?.nickName} />
         <StatsWrap>
-          <TotalRecord />
-          <RankTrend />
+          <TotalRecord data={data.userMatch} />
+          <RankTrend data={data.userMatch} />
           <Comment />
         </StatsWrap>
         <Tab />
         <InfoWrap>
-          <LeftInfo />
-          <RightInfo />
+          <RecordTable userMatchdata={data.userMatch} matchType={matchType} />
+          <RecordList />
         </InfoWrap>
       </Inner>
     </UserContainer>
@@ -109,4 +105,7 @@ const StatsWrap = styled.div`
   display: flex;
 `;
 
-const InfoWrap = styled.div``;
+const InfoWrap = styled.div`
+  display: flex;
+  margin-top: 20px;
+`;
