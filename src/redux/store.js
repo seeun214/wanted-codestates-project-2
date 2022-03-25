@@ -9,4 +9,8 @@ export const store = configureStore({
     matchAllList: allMatchListReducer,
     matchDetail: matchDetailReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
