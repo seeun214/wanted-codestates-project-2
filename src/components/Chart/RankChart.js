@@ -23,18 +23,18 @@ const RankChart = ({ data }) => {
   return (
     <div>
       <LineChart
-        width={300}
+        width={320}
         height={250}
         data={latelyRank}
         margin={{
-          top: 15,
-          right: -10,
+          top: 20,
+          right: 10,
           left: -30,
           bottom: 35,
         }}
       >
         <CartesianGrid stroke="#ebebeb" />
-        <XAxis dataKey="game" reversed tick={false} />
+        <XAxis dataKey="game" reversed tick={false} domain={[1, 50]} />
         <YAxis
           datakey="rank"
           reversed

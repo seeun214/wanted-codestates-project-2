@@ -6,10 +6,12 @@ import TrackTable from './TrackTable';
 import TrackMetaData from '../../../assets/track.json';
 import KartThumnail from './KartThumnail';
 import KartTable from './KartTable';
+import KartMetaData from '../../../assets/kart.json';
 
 const RecordTable = ({ userMatchdata, matchType }) => {
   const [trackData, setTrackData] = useState();
   const [tabIndex, setTabIndex] = useState(1);
+  const [kartData, setKartData] = useState();
 
   useEffect(() => {
     if (userMatchdata) {
@@ -36,6 +38,34 @@ const RecordTable = ({ userMatchdata, matchType }) => {
       setTrackData(trackInfo);
     }
   }, [matchType]);
+
+  useEffect(() => {
+    if (userMatchdata) {
+      const kartId = userMatchdata.map((el) => el.kart);
+      const uniqueKartId = [...new Set(kartId)];
+      const kartInfo = uniqueKartId.map((kartId) => {
+        const kartList = userMatchdata.filter((el) => el.kart === kartId);
+        const kartMatch = KartMetaData.find((el) => el.id === kartId);
+        const number = kartList.length;
+        const win = kartList.filter(
+          (el) => el.kart === kartId && el.matchWin === '1',
+        ).length;
+        const retire = kartList.filter(
+          (el) => el.kart === kartId && el.matchRetired === '1',
+        ).length;
+        return {
+          kartId,
+          kartList,
+          kartName: kartMatch.name,
+          number,
+          win,
+          retire,
+        };
+      });
+      kartInfo.sort((a, b) => b.number - a.number);
+      setKartData(kartInfo);
+    }
+  }, []);
 
   return (
     <Container>
@@ -70,7 +100,11 @@ const RecordTable = ({ userMatchdata, matchType }) => {
         )}
 
         <GraphWrap>
-          {tabIndex === 1 ? <TrackChart /> : <KartThumnail />}
+          {tabIndex === 1 ? (
+            <TrackChart />
+          ) : (
+            <KartThumnail kartData={kartData} />
+          )}
         </GraphWrap>
         <TableWrapper>
           {tabIndex === 1 ? (
@@ -149,6 +183,7 @@ const GraphWrap = styled.div`
   padding-top: 15px;
   padding-bottom: 15px;
 `;
+
 const TableWrapper = styled.ul`
   overflow-y: auto;
   height: 235px;

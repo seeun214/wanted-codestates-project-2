@@ -1,50 +1,122 @@
 import styled from '@emotion/styled';
 import { faCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ContentBox } from '../../../styles/styles';
 import { BlueText, Summary, Title } from './TotalRecord';
+import firebase from 'firebase/compat/app';
+import { useFirestoreQuery } from '../../../hooks/useFirestoreQuery';
+import firebaseApp from '../../../firebase';
+import checkToday from '../../../api/checkToday';
 
-const Comment = () => {
-  const [todayMessage, setTodayMessage] = useState();
+const Comment = ({ id = null }) => {
+  const db = firebaseApp.firestore();
+  const messageRef = db.collection(`message`);
+  const message = useFirestoreQuery(messageRef.orderBy('createdAt', 'desc'));
+  const [loading, setLoading] = useState();
+  const [messages, setMessages] = useState([]);
+  const [todayMessage, setTodayMessage] = useState([]);
+  const [inputMessage, setInputMessage] = useState({
+    nickName: '',
+    content: '',
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (inputMessage) {
+      messageRef.add({
+        nickName: inputMessage.nickName,
+        content: inputMessage.content,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      });
+    }
+    setInputMessage({ nickName: '', content: '' });
+  };
+
+  const handleInputChange = (e) => {
+    setInputMessage({ ...inputMessage, [e.target.name]: e.target.value });
+  };
+
+  //firebase db에서 message 가져오기
+  useEffect(() => {
+    setLoading(true);
+    db.collection('message')
+      .orderBy('createdAt', 'desc')
+      .onSnapshot((d) => {
+        setMessages(
+          d.docs.map((doc) => ({
+            nickName: doc.data().nickName,
+            content: doc.data().content,
+            createdAt: doc.data().createdAt.toDate(),
+          })),
+        );
+      });
+    return () => setLoading(false);
+  }, [inputMessage]);
+
+  //오늘 작성된 message
+  useEffect(() => {
+    if (messages) {
+      const todayMessage = messages.filter((message) =>
+        checkToday(message.createdAt),
+      );
+      setTodayMessage([todayMessage]);
+    }
+  }, [messages]);
+
   return (
     <ContentBox marginRight={true}>
       <Title>
         <BlueText>응원</BlueText>한마디
-        <Summary>오늘 {todayMessage} 전체 26개</Summary>
+        <Summary>
+          오늘 {todayMessage.length !== 0 ? todayMessage[0].length : '0'}개 전체
+          {message ? message.length : '0'}개
+        </Summary>
       </Title>
       <MessageContainer>
         <MessageList>
-          <Message>
-            <NinkName>
-              새은 <FontAwesomeIcon icon={faCircle} color={'#f62459'} />
-            </NinkName>
-            <SpeechBubble>오이오이</SpeechBubble>
-          </Message>
-          <Message>
-            <NinkName>
-              새은 <FontAwesomeIcon icon={faCircle} color={'#f62459'} />
-            </NinkName>
-            <SpeechBubble>오이오이</SpeechBubble>
-          </Message>
+          {messages?.map((message, index) => (
+            <Message key={index}>
+              <NinkName>
+                <Text>{message.nickName}</Text>
+                {checkToday(message.createdAt) === true ? (
+                  <>
+                    <FontAwesomeIcon
+                      icon={faCircle}
+                      color={'#f62459'}
+                      fontSize={'9px'}
+                    />
+                  </>
+                ) : null}
+              </NinkName>
+              <SpeechBubble>{message.content}</SpeechBubble>
+            </Message>
+          ))}
         </MessageList>
       </MessageContainer>
+
       <Bottom>
         <InputMessage>
           <Input
             type="text"
             placeholder="닉네임"
             maxlength="5"
-            className="nick"
-            inputType={'nick'}
+            inputSize={'nick'}
+            name="nickName"
+            onChange={handleInputChange}
+            value={inputMessage.nickName}
           />
           <Input
             type="text"
             placeholder="최대 30자"
             maxlength="30"
-            className="chat"
+            name="content"
+            onChange={handleInputChange}
+            value={inputMessage.content}
           />
-          <Button>남기기</Button>
+          <Button type="button" onClick={handleSubmit}>
+            남기기
+          </Button>
         </InputMessage>
       </Bottom>
     </ContentBox>
@@ -72,6 +144,10 @@ const NinkName = styled.div`
   display: inline-block;
   color: #07f;
   line-height: 53px;
+`;
+
+const Text = styled.span`
+  margin-right: 5px;
 `;
 
 const SpeechBubble = styled.div`
@@ -120,16 +196,16 @@ const Bottom = styled.ul`
   line-height: 30px;
 `;
 
-const InputMessage = styled.ul`
+const InputMessage = styled.form`
   display: flex;
   height: 30px;
 `;
 
 const Input = styled.input`
-  flex: ${(props) => (props.inputType ? '0.8' : '2')};
+  flex: ${(props) => (props.inputSize ? '0.8' : '2')};
   margin-right: 5px;
   vertical-align: middle;
-  width: ${(props) => (props.inputType ? '15%' : '60%')};
+  width: ${(props) => (props.inputSize ? '15%' : '60%')};
   border: none;
   border-bottom: 1px solid #ccc;
   font-family: Noto Sans KR;
