@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import React, { useEffect, useRef } from 'react';
 
-const CircleChart = ({ percent, color }) => {
+const CircleChart = ({ percent, color, size, innerSize, fontSize }) => {
   const chart = useRef(null);
   let i = 1;
 
@@ -29,9 +29,11 @@ const CircleChart = ({ percent, color }) => {
   }, [percent, color]);
 
   return (
-    <Circle ref={chart}>
-      <InnerCircle>
-        <Percent color={color}>{percent}%</Percent>
+    <Circle ref={chart} size={size}>
+      <InnerCircle innerSize={innerSize}>
+        <Percent color={color} fontSize={fontSize}>
+          {percent}%
+        </Percent>
       </InnerCircle>
     </Circle>
   );
@@ -41,8 +43,8 @@ export default CircleChart;
 
 const Circle = styled.div`
   margin: 20px auto;
-  width: 83px;
-  height: 83px;
+  width: ${(props) => (props.size ? props.size : '87px')};
+  height: ${(props) => (props.size ? props.size : '87px')};
   border-radius: 50%;
   position: relative;
   transition: 0.3s;
@@ -53,8 +55,8 @@ const InnerCircle = styled.span`
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 68px;
-  height: 68px;
+  width: ${(props) => (props.innerSize ? props.innerSize : '68px')};
+  height: ${(props) => (props.innerSize ? props.innerSize : '68px')};
   border-radius: 50%;
   text-align: center;
   line-height: 40px;
@@ -68,7 +70,7 @@ const Percent = styled.span`
   left: 50%;
   transform: translateX(-50%);
   margin-top: -20px;
-  font-size: 20px;
+  font-size: ${(props) => (props.fontSize ? props.fontSize : '20px')};
   font-weight: 700;
   color: ${(props) => props.color};
 `;

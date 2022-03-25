@@ -7,6 +7,7 @@ import { BlueText, Summary, Title } from './TotalRecord';
 
 const Comment = () => {
   const [todayMessage, setTodayMessage] = useState();
+  const handleSubmit = () => {};
   return (
     <ContentBox marginRight={true}>
       <Title>
@@ -30,20 +31,14 @@ const Comment = () => {
         </MessageList>
       </MessageContainer>
       <Bottom>
-        <InputMessage>
+        <InputMessage onSubmit={handleSubmit}>
           <Input
             type="text"
             placeholder="닉네임"
             maxlength="5"
-            className="nick"
             inputType={'nick'}
           />
-          <Input
-            type="text"
-            placeholder="최대 30자"
-            maxlength="30"
-            className="chat"
-          />
+          <Input type="text" placeholder="최대 30자" maxlength="30" />
           <Button>남기기</Button>
         </InputMessage>
       </Bottom>
@@ -120,7 +115,7 @@ const Bottom = styled.ul`
   line-height: 30px;
 `;
 
-const InputMessage = styled.ul`
+const InputMessage = styled.form`
   display: flex;
   height: 30px;
 `;

@@ -5,56 +5,54 @@ import TeamSelectButton from '../TeamSelectButton';
 
 const TopContent = () => {
   return (
-    <div>
-      <Container>
-        <PageName>3월 TMI 랭킹</PageName>
-        <Line></Line>
-        <SubInfo>
-          <BoldText>랭킹 산정기간</BoldText>
-          2022년 03월 01일 00:00:00&nbsp;&nbsp;~&nbsp;&nbsp;2022년 03월 31일
-          24:00:00
-        </SubInfo>
-        <SubInfo>
-          <BoldText>최근 업데이트</BoldText>
-          2022년 03월 24일 09:15:14
-        </SubInfo>
-        <GuideButton>랭킹가이드</GuideButton>
-        <ButtonsWrap>
-          <SpeedSelect>
-            <SelectButton
-              borderWidth={'0.7px 0 0.7px 0.7px'}
-              borderRadius={'5px 0 0 5px'}
-              width={'36px'}
-              height={'25px'}
-              color={'#fff'}
-            >
-              통합
-            </SelectButton>
-            <SelectButton
-              borderWidth={'0.7px'}
-              borderRadius={'0'}
-              width={'36px'}
-              height={'25px'}
-              color={'#fff'}
-            >
-              매빠
-            </SelectButton>
-            <SelectButton
-              borderWidth={'0.7px 0.7px 0.7px 0px'}
-              borderRadius={'0 5px 5px 0'}
-              width={'36px'}
-              height={'25px'}
-              color={'#fff'}
-            >
-              무부
-            </SelectButton>
-          </SpeedSelect>
-          <TeamSelect>
-            <TeamSelectButton color={'#fff'} />
-          </TeamSelect>
-        </ButtonsWrap>
-      </Container>
-    </div>
+    <Container>
+      <PageName>3월 TMI 랭킹</PageName>
+      <Line></Line>
+      <SubInfo>
+        <BoldText>랭킹 산정기간</BoldText>
+        2022년 03월 01일 00:00:00&nbsp;&nbsp;~&nbsp;&nbsp;2022년 03월 31일
+        24:00:00
+      </SubInfo>
+      <SubInfo>
+        <BoldText>최근 업데이트</BoldText>
+        2022년 03월 24일 09:15:14
+      </SubInfo>
+      <GuideButton>랭킹가이드</GuideButton>
+      <ButtonsWrap>
+        <SpeedSelect>
+          <SelectButton
+            borderWidth={'0.7px 0 0.7px 0.7px'}
+            borderRadius={'5px 0 0 5px'}
+            width={'36px'}
+            height={'25px'}
+            color={'#fff'}
+          >
+            통합
+          </SelectButton>
+          <SelectButton
+            borderWidth={'0.7px'}
+            borderRadius={'0'}
+            width={'36px'}
+            height={'25px'}
+            color={'#fff'}
+          >
+            매빠
+          </SelectButton>
+          <SelectButton
+            borderWidth={'0.7px 0.7px 0.7px 0px'}
+            borderRadius={'0 5px 5px 0'}
+            width={'36px'}
+            height={'25px'}
+            color={'#fff'}
+          >
+            무부
+          </SelectButton>
+        </SpeedSelect>
+        <TeamSelect>
+          <TeamSelectButton color={'#fff'} />
+        </TeamSelect>
+      </ButtonsWrap>
+    </Container>
   );
 };
 
@@ -63,7 +61,7 @@ export default TopContent;
 const Container = styled.div`
   z-index: 5;
   position: relative;
-  width: 1300px;
+  width: 1000px;
   padding-top: 50px;
   margin: 0 auto;
   background-color: transparent;
