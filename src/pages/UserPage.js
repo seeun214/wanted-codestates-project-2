@@ -14,7 +14,6 @@ import Tab from '../components/UserPage/Tab';
 import RecordTable from '../components/UserPage/RecordTable/RecordTable';
 import RecordList from '../components/UserPage/RecordList/RecordList';
 import Loading from '../components/Loading';
-import Footer from '../components/Footer';
 
 const UserPage = () => {
   const soloType =
@@ -40,9 +39,6 @@ const UserPage = () => {
     }
   }, [params.id]);
 
-  console.log('user Page');
-  console.log(data.userMatch);
-
   return loading ? (
     <Loading />
   ) : (
@@ -66,8 +62,15 @@ const UserPage = () => {
         </StatsWrap>
         <Tab />
         <InfoWrap>
-          <RecordTable userMatchdata={data.userMatch} matchType={matchType} />
-          <RecordList />
+          <RecordTableWrap>
+            <RecordTable userMatchdata={data.userMatch} matchType={matchType} />
+          </RecordTableWrap>
+
+          <RecordListWrap>
+            {data.userMatch?.map((data, index) => (
+              <RecordList data={data} key={index} />
+            ))}
+          </RecordListWrap>
         </InfoWrap>
       </Inner>
     </UserContainer>
@@ -108,4 +111,14 @@ const StatsWrap = styled.div`
 const InfoWrap = styled.div`
   display: flex;
   margin-top: 20px;
+`;
+
+const RecordTableWrap = styled.span`
+  width: 327px;
+  margin-right: 10px;
+`;
+
+const RecordListWrap = styled.span`
+  width: 660px;
+  margin-top: 40px;
 `;

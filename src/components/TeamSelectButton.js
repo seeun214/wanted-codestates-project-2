@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { SelectButton } from '../styles/styles';
 
-const TeamSelectButton = ({ color }) => {
+const TeamSelectButton = ({ color, iconColor }) => {
   return (
     <div>
       <SelectButton
@@ -13,7 +13,7 @@ const TeamSelectButton = ({ color }) => {
         height={'25px'}
         color={color}
       >
-        <FontAwesomeIcon icon={faUser} />
+        <FontAwesomeIcon icon={faUser} color={iconColor} />
         개인전
       </SelectButton>
       <SelectButton
@@ -23,7 +23,7 @@ const TeamSelectButton = ({ color }) => {
         height={'25px'}
         color={color}
       >
-        <FontAwesomeIcon icon={faUsers} />
+        <FontAwesomeIcon icon={faUsers} color={iconColor} />
         팀전
       </SelectButton>
     </div>

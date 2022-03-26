@@ -1,9 +1,11 @@
 import styled from '@emotion/styled';
 import React from 'react';
+import CircleChart from '../Chart/CircleChart';
+import { Title } from '../UserPage/StatsContent/TotalRecord';
 
-const TopRanker = ({ medalImg }) => {
+const TopRanker = ({ medalImg, marginLeft }) => {
   return (
-    <Container>
+    <Container marginLeft={marginLeft}>
       <MedalImg alt="medalImg" src={medalImg}></MedalImg>
       <UserInfo>
         <Nick>법사케피</Nick>
@@ -15,8 +17,26 @@ const TopRanker = ({ medalImg }) => {
         </SubInfo>
       </UserInfo>
       <PercentWrap>
-        <WinPercent></WinPercent>
-        <RetirePercent></RetirePercent>
+        <WinPercent>
+          <PercentTitle>승률</PercentTitle>
+          <CircleChart
+            percent={'65'}
+            color={'#07f'}
+            size={'57px'}
+            innerSize={'47px'}
+            fontSize={'16px'}
+          />
+        </WinPercent>
+        <RetirePercent>
+          <PercentTitle>리타이어율</PercentTitle>
+          <CircleChart
+            percent={'40'}
+            color={'#f62459'}
+            size={'57px'}
+            innerSize={'47px'}
+            fontSize={'16px'}
+          />
+        </RetirePercent>
       </PercentWrap>
     </Container>
   );
@@ -25,7 +45,8 @@ const TopRanker = ({ medalImg }) => {
 export default TopRanker;
 
 const Container = styled.div`
-  /* margin-left: 88px; */
+  z-index: 5;
+  margin-left: ${(props) => (props.marginLeft ? props.marginLeft : '0')};
   position: relative;
   display: inline-block;
   flex: 1;
@@ -36,18 +57,70 @@ const Container = styled.div`
   box-shadow: 5px 5px 5px -5px rgb(0 0 0 / 21%);
 `;
 
-const MedalImg = styled.img``;
+const MedalImg = styled.img`
+  position: absolute;
+  top: -12px;
+  left: 10px;
+`;
 
-const UserInfo = styled.div``;
+const UserInfo = styled.div`
+  box-sizing: border-box;
+  padding: 37px 0px 20px 40px;
+  border-radius: 10px;
+  background-image: url('https://tmi.nexon.com/img/background_flag_w.png');
+  background-size: cover;
+  background-position: 50%;
+`;
 
-const Nick = styled.div``;
+const Nick = styled.div`
+  margin-bottom: 13px;
+`;
 
-const SubInfo = styled.div``;
+const SubInfo = styled.div`
+  font-size: 14px;
+`;
 
-const BoldText = styled.div``;
+const BoldText = styled.span`
+  margin-left: 5px;
+  font-weight: 700;
+`;
 
-const PercentWrap = styled.div``;
+const PercentTitle = styled.p`
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  font-weight: 500;
+`;
 
-const WinPercent = styled.div``;
+const PercentWrap = styled.div`
+  display: flex;
+  border-top: 1px solid #07f;
+`;
 
-const RetirePercent = styled.div``;
+const WinPercent = styled.div`
+  position: relative;
+  padding-top: 25px;
+  flex: 1;
+  text-align: center;
+  ::after {
+    position: absolute;
+    content: ' ';
+    display: block;
+    top: 20px;
+    right: 0;
+    width: 1px;
+    height: 75px;
+    background-color: #f2f2f2;
+    border: none;
+    opacity: 1;
+  }
+`;
+
+const RetirePercent = styled.div`
+  position: relative;
+  padding-top: 25px;
+  flex: 1;
+  text-align: center;
+`;

@@ -10,6 +10,7 @@ import {
 } from 'recharts';
 
 const RankChart = ({ data }) => {
+  let duration = 1;
   const latelyRank =
     data &&
     data.slice(0, 50).map((rank, index) => {
@@ -18,22 +19,22 @@ const RankChart = ({ data }) => {
         game: index + 1,
       };
     });
-  console.log(latelyRank);
+
   return (
     <div>
       <LineChart
-        width={300}
+        width={320}
         height={250}
         data={latelyRank}
         margin={{
-          top: 15,
-          right: -10,
+          top: 20,
+          right: 10,
           left: -30,
           bottom: 35,
         }}
       >
         <CartesianGrid stroke="#ebebeb" />
-        <XAxis dataKey="game" reversed tick={false} />
+        <XAxis dataKey="game" reversed tick={false} domain={[1, 50]} />
         <YAxis
           datakey="rank"
           reversed
@@ -50,20 +51,11 @@ const RankChart = ({ data }) => {
           stroke="#07f"
           fill="#07f"
           dot={{ strokeWidth: 1, r: 2 }}
-          animationDuration="0"
+          animationDuration={duration}
         />
       </LineChart>
-      <CustomizedDot />
     </div>
   );
 };
 
 export default RankChart;
-
-export const CustomizedDot = styled.div`
-  z-index: 99;
-  width: 2px;
-  height: 2px;
-  border-radius: 50%;
-  background-color: #07f;
-`;

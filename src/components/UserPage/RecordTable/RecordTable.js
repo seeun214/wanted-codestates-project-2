@@ -4,30 +4,69 @@ import TrackChart from '../../Chart/TrackChart';
 import { BlueText } from '../StatsContent/TotalRecord';
 import TrackTable from './TrackTable';
 import TrackMetaData from '../../../assets/track.json';
-import { useDispatch, useSelector } from 'react-redux';
-import { getAllMatchList } from '../../../redux/reducers/allMatchListReducer';
 import KartThumnail from './KartThumnail';
 import KartTable from './KartTable';
+import KartMetaData from '../../../assets/kart.json';
 
 const RecordTable = ({ userMatchdata, matchType }) => {
   const [trackData, setTrackData] = useState();
   const [tabIndex, setTabIndex] = useState(1);
-  const { data, loading, error } = useSelector((state) => state.matchAllList);
-  const dispatch = useDispatch();
-  if (userMatchdata) {
-    const trackId = userMatchdata.map((el) => el.trackId);
-    // const track = trackId.map((trackId)=>{
-    //   TrackMetaData.map((el) => el.id === trackId);
-  }
+  const [kartData, setKartData] = useState();
+
   useEffect(() => {
-    dispatch(
-      getAllMatchList({
-        matchType,
-      }),
-    );
+    if (userMatchdata) {
+      const trackId = userMatchdata.map((el) => el.trackId);
+      const uniqueTrackId = [...new Set(trackId)];
+      const trackInfo = uniqueTrackId.map((trackId) => {
+        const trackList = userMatchdata.filter((el) => el.trackId === trackId);
+        const trackMatch = TrackMetaData.find((el) => el.id === trackId);
+        const number = trackList.length;
+        const win = trackList.filter(
+          (el) => el.trackId === trackId && el.matchWin === '1',
+        ).length;
+        const recordArray = trackList.map((el) => Number(el.matchTime));
+
+        return {
+          trackId,
+          trackName: trackMatch.name,
+          number,
+          win,
+          recordArray,
+        };
+      });
+      trackInfo.sort((a, b) => b.number - a.number);
+      setTrackData(trackInfo);
+    }
   }, [matchType]);
 
-  console.log(data);
+  useEffect(() => {
+    if (userMatchdata) {
+      const kartId = userMatchdata.map((el) => el.kart);
+      const uniqueKartId = [...new Set(kartId)];
+      const kartInfo = uniqueKartId.map((kartId) => {
+        const kartList = userMatchdata.filter((el) => el.kart === kartId);
+        const kartMatch = KartMetaData.find((el) => el.id === kartId);
+        const number = kartList.length;
+        const win = kartList.filter(
+          (el) => el.kart === kartId && el.matchWin === '1',
+        ).length;
+        const retire = kartList.filter(
+          (el) => el.kart === kartId && el.matchRetired === '1',
+        ).length;
+        return {
+          kartId,
+          kartList,
+          kartName: kartMatch.name,
+          number,
+          win,
+          retire,
+        };
+      });
+      kartInfo.sort((a, b) => b.number - a.number);
+      setKartData(kartInfo);
+    }
+  }, []);
+
   return (
     <Container>
       <TabBox>
@@ -61,10 +100,18 @@ const RecordTable = ({ userMatchdata, matchType }) => {
         )}
 
         <GraphWrap>
-          {tabIndex === 1 ? <TrackChart /> : <KartThumnail />}
+          {tabIndex === 1 ? (
+            <TrackChart />
+          ) : (
+            <KartThumnail kartData={kartData} />
+          )}
         </GraphWrap>
         <TableWrapper>
-          {tabIndex === 1 ? <TrackTable /> : <KartTable />}
+          {tabIndex === 1 ? (
+            <TrackTable trackData={trackData} />
+          ) : (
+            <KartTable />
+          )}
         </TableWrapper>
       </TableWrap>
     </Container>
@@ -136,6 +183,7 @@ const GraphWrap = styled.div`
   padding-top: 15px;
   padding-bottom: 15px;
 `;
+
 const TableWrapper = styled.ul`
   overflow-y: auto;
   height: 235px;

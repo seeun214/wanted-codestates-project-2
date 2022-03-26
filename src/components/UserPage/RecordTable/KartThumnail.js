@@ -1,34 +1,39 @@
 import styled from '@emotion/styled';
-import React from 'react';
-import KartTable from './KartTable';
+import React, { useEffect, useState } from 'react';
+import KartMetaData from '../../../assets/kart.json';
 
-const KartThumnail = () => {
+const KartThumnail = ({ kartData }) => {
+  const [selectedKart, setSelectedKart] = useState(0);
+
   return (
     <Container>
       <KartName>
-        <Badge>일반</Badge>몬스터XLE
+        <Badge>일반</Badge>
+        {kartData[selectedKart].kartName}
       </KartName>
       <Kart>
         <Thumnail>
           <KartImg
             alt="kartImg"
             data-v-749ad536=""
-            src="https://s3-ap-northeast-1.amazonaws.com/solution-userstats/metadata/kart/0b41bf8620b5851d7dcc7eb33765d506e530b8d2e612e6c60823f2b890da3401.png?v=1647948645"
+            src={`https://s3-ap-northeast-1.amazonaws.com/solution-userstats/metadata/kart/${kartData[selectedKart].kartId}.png?v=1647948645`}
             onerror='this.src="/img/assets/empty_kart.png"'
           ></KartImg>
         </Thumnail>
         <RecordWrap>
-          <RecordList>
-            <Record>
-              <TrackImg
-                alt="TrackImg"
-                src="https://s3-ap-northeast-1.amazonaws.com/solution-userstats/kartimg/Category/korea_1.png"
-                onerror='this.src="https://s3-ap-northeast-1.amazonaws.com/solution-userstats/kartimg/Category/allRandomThumb2@zz.png"'
-              ></TrackImg>
-              <Text>코리아 제주 해오름</Text>
-              <Text>1'04'49</Text>
-            </Record>
-          </RecordList>
+          {kartData.map((kart) => (
+            <RecordList>
+              <Record>
+                <TrackImg
+                  alt="TrackImg"
+                  src={`https://s3-ap-northeast-1.amazonaws.com/solution-userstats/metadata/kart/${kart.kartId}.png?v=1647948645`}
+                  onerror='this.src="https://s3-ap-northeast-1.amazonaws.com/solution-userstats/kartimg/Category/allRandomThumb2@zz.png"'
+                ></TrackImg>
+                <Text>코해오름리아 제주 </Text>
+                <Text>1'04'49</Text>
+              </Record>
+            </RecordList>
+          ))}
         </RecordWrap>
       </Kart>
     </Container>

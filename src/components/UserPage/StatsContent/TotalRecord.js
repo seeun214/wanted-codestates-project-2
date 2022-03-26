@@ -71,14 +71,14 @@ export const Summary = styled.p`
   margin-left: 0.5rem;
 `;
 
-const Section = styled.p`
+const Section = styled.div`
   width: 95%;
   margin: 0 auto;
   display: flex;
   text-align: center;
 `;
 
-const Chart = styled.p`
+const Chart = styled.div`
   position: relative;
   flex: 1;
   margin-top: 8px;
