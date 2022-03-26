@@ -1,9 +1,7 @@
 import styled from '@emotion/styled';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 const TrackTable = ({ trackData }) => {
-  // const [recordWithoutZero, setRecordWithoutZero] = useState([]);
-
   return (
     <TableContainer>
       <Table>
@@ -19,7 +17,7 @@ const TrackTable = ({ trackData }) => {
         </TableHead>
         <Tbody>
           {trackData?.map((track, index) => (
-            <TableBody key={index}>
+            <TableBody key={track.trackId}>
               <Td>
                 <input type="radio" value="id값" />
               </Td>
@@ -29,8 +27,8 @@ const TrackTable = ({ trackData }) => {
                 }}
               >
                 <img
-                  src="https://s3-ap-northeast-1.amazonaws.com/solution-userstats/kartimg/Category/brodi_1.png"
-                  alt="트랙이미지"
+                  src={`https://s3-ap-northeast-1.amazonaws.com/solution-userstats/kartimg/Category/village_1.png`}
+                  alt="TrackImg"
                   height={27}
                 ></img>
                 {track.trackName}

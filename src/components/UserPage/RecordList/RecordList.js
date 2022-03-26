@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import React from 'react';
+import React, { useEffect } from 'react';
 import TrackMetaData from '../../../assets/track.json';
 import KartMetaData from '../../../assets/kart.json';
 import timeForToday from '../../../api/timeForToday';
@@ -11,13 +11,17 @@ const RecordList = ({ data }) => {
     trackName = TrackMetaData.find((el) => el.id === data.trackId);
     KartName = KartMetaData.find((el) => el.id === data.kart);
   }
+  // useEffect(() => {
+  //   if (data.matchRank === '0') {
 
-  return data.matchRank ? (
+  //   }
+  // }, []);
+  return (
     <ListContainer>
       <Section win={data.matchRank} retire={data.matchRetired}>
         <Type>{timeForToday(data.endTime)}</Type>
-        {data.matchRetired === '1' ? (
-          <Result win={data.matchRank} retire={data.matchRetired}>
+        {data.matchRetired === '1' || data.matchRank === '' ? (
+          <Result win={data.matchRank} retire={'1'}>
             #리타이어
           </Result>
         ) : (
@@ -35,7 +39,7 @@ const RecordList = ({ data }) => {
         </Open>
       </Section>
     </ListContainer>
-  ) : null;
+  );
 };
 
 export default RecordList;
@@ -52,12 +56,16 @@ const Section = styled.div`
   height: 88px;
   font-size: 16px;
   background-color: ${(props) =>
-    props.win === '1' ? '#F0F3FA;' : props.retire === '1' ? '#F9F0F2' : '#fff'};
+    props.win === '1'
+      ? '#F0F3FA;'
+      : props.retire === '1' || props.win === ''
+      ? '#F9F0F2'
+      : '#fff'};
   border-width: 1px 1px 1px 4px;
   border-color: ${(props) =>
     props.win === '1'
       ? '#f2f2f2 #f2f2f2 #f2f2f2 #07f;'
-      : props.retire === '1'
+      : props.retire === '1' || props.win === ''
       ? '#f2f2f2 #f2f2f2 #f2f2f2 #f62459;'
       : '#f2f2f2 #f2f2f2 #f2f2f2 #a1a1a1;'};
   border-style: solid;

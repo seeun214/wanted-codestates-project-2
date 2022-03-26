@@ -1,10 +1,11 @@
 import styled from '@emotion/styled';
 import React, { useEffect, useState } from 'react';
-import KartMetaData from '../../../assets/kart.json';
 
 const KartThumnail = ({ kartData }) => {
   const [selectedKart, setSelectedKart] = useState(0);
+  console.log(kartData);
 
+  useEffect(() => {}, []);
   return (
     <Container>
       <KartName>
@@ -15,25 +16,26 @@ const KartThumnail = ({ kartData }) => {
         <Thumnail>
           <KartImg
             alt="kartImg"
-            data-v-749ad536=""
             src={`https://s3-ap-northeast-1.amazonaws.com/solution-userstats/metadata/kart/${kartData[selectedKart].kartId}.png?v=1647948645`}
             onerror='this.src="/img/assets/empty_kart.png"'
           ></KartImg>
         </Thumnail>
         <RecordWrap>
-          {kartData.map((kart) => (
-            <RecordList>
-              <Record>
-                <TrackImg
-                  alt="TrackImg"
-                  src={`https://s3-ap-northeast-1.amazonaws.com/solution-userstats/metadata/kart/${kart.kartId}.png?v=1647948645`}
-                  onerror='this.src="https://s3-ap-northeast-1.amazonaws.com/solution-userstats/kartimg/Category/allRandomThumb2@zz.png"'
-                ></TrackImg>
-                <Text>코해오름리아 제주 </Text>
-                <Text>1'04'49</Text>
-              </Record>
-            </RecordList>
-          ))}
+          {kartData?.map((kart, index) =>
+            index < 4 ? (
+              <RecordList key={kart.kartId}>
+                <Record>
+                  <TrackImg
+                    alt="TrackImg"
+                    src={`https://s3-ap-northeast-1.amazonaws.com/solution-userstats/kartimg/Category/village_1.png`}
+                    onerror='this.src="https://s3-ap-northeast-1.amazonaws.com/solution-userstats/kartimg/Category/allRandomThumb2@zz.png"'
+                  ></TrackImg>
+                  <Text>코해오름리아 제주 </Text>
+                  <Text>1'04'49</Text>
+                </Record>
+              </RecordList>
+            ) : null,
+          )}
         </RecordWrap>
       </Kart>
     </Container>

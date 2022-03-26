@@ -24,6 +24,7 @@ const UserPage = () => {
   const dispatch = useDispatch();
   const params = useParams();
 
+  console.log(data);
   useEffect(() => {
     dispatch(
       getUserMatchList({
@@ -31,7 +32,7 @@ const UserPage = () => {
         matchType,
       }),
     );
-  }, [matchType]);
+  }, [matchType, nickName, dispatch]);
 
   useEffect(() => {
     if (params.id) {

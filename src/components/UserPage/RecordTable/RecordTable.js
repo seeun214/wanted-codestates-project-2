@@ -37,7 +37,7 @@ const RecordTable = ({ userMatchdata, matchType }) => {
       trackInfo.sort((a, b) => b.number - a.number);
       setTrackData(trackInfo);
     }
-  }, [matchType]);
+  }, [userMatchdata]);
 
   useEffect(() => {
     if (userMatchdata) {
@@ -65,7 +65,7 @@ const RecordTable = ({ userMatchdata, matchType }) => {
       kartInfo.sort((a, b) => b.number - a.number);
       setKartData(kartInfo);
     }
-  }, []);
+  }, [userMatchdata]);
 
   return (
     <Container>
@@ -110,7 +110,7 @@ const RecordTable = ({ userMatchdata, matchType }) => {
           {tabIndex === 1 ? (
             <TrackTable trackData={trackData} />
           ) : (
-            <KartTable />
+            <KartTable kartData={kartData} />
           )}
         </TableWrapper>
       </TableWrap>
