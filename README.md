@@ -35,8 +35,6 @@
 
 ### ✅ 애니메이션 구현
 
-
-
 ### ✅ firebase 사용해서 응원 한마디 데이터 저장
 <img width="331" alt="스크린샷 2022-03-26 오전 11 17 40" src="https://user-images.githubusercontent.com/81206124/160227848-3ec4668c-75d3-4efc-911b-7c045fd5f664.png"> <img width="540" alt="스크린샷 2022-03-26 오전 11 25 23" src="https://user-images.githubusercontent.com/81206124/160227851-a28669d9-42d8-4859-9c07-70d0c63d1e79.png">
 
