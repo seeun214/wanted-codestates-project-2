@@ -52,7 +52,7 @@ const Comment = ({ id = null }) => {
         );
       });
     return () => setLoading(false);
-  }, [inputMessage]);
+  }, [db]);
 
   //오늘 작성된 message
   useEffect(() => {

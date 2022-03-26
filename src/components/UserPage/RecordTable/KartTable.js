@@ -1,39 +1,43 @@
 import styled from '@emotion/styled';
 import React from 'react';
 
-const KartTable = () => {
+const KartTable = ({ kartData }) => {
   return (
     <TableContainer>
       <Table>
         <TableHead>
-          <Th>선택</Th>
-          <Th>카트</Th>
-          <Th>횟수</Th>
-          <Th>승률</Th>
-          <Th>리타율</Th>
+          <tr>
+            <Th>선택</Th>
+            <Th>카트</Th>
+            <Th>횟수</Th>
+            <Th>승률</Th>
+            <Th>리타율</Th>
+          </tr>
         </TableHead>
         <Tbody>
-          <Tr>
-            <Td>
-              <input type="radio" value="id값" />
-            </Td>
-            <Td
-              style={{
-                textAlign: 'left',
-                paddingRight: '20px',
-              }}
-            >
-              <img
-                src="https://s3-ap-northeast-1.amazonaws.com/solution-userstats/kartimg/Category/brodi_1.png"
-                alt="트랙이미지"
-                height={27}
-              ></img>
-              브로디 비밀의 연구
-            </Td>
-            <Td>195</Td>
-            <Td>34%</Td>
-            <Td>8%</Td>
-          </Tr>
+          {kartData.map((kart, index) => (
+            <Tr key={kart.kartId}>
+              <Td>
+                <input type="radio" value="id값" />
+              </Td>
+              <Td
+                style={{
+                  textAlign: 'left',
+                  paddingRight: '30px',
+                }}
+              >
+                <img
+                  src={`https://s3-ap-northeast-1.amazonaws.com/solution-userstats/metadata/kart/${kart.kartId}.png?v=1647948645`}
+                  alt="kartImg"
+                  height={27}
+                ></img>
+                {kart.kartName}
+              </Td>
+              <Td>{kart.number}</Td>
+              <Td>{`${Math.round((kart.win / kart.number) * 100)}`}%</Td>
+              <Td>{`${Math.round((kart.retire / kart.number) * 100)}`}%</Td>
+            </Tr>
+          ))}
         </Tbody>
       </Table>
     </TableContainer>
@@ -44,7 +48,7 @@ export default KartTable;
 
 const TableContainer = styled.div`
   box-sizing: border-box;
-  width: 378px;
+  width: 327px;
   font-size: 13px;
   line-height: 35px;
   border-collapse: collapse;
@@ -90,9 +94,8 @@ const Tr = styled.tr`
 
 const Td = styled.td`
   line-height: 45px;
-
-  padding-left: 5px;
-  padding-right: 8px;
+  padding-left: 12px;
+  padding-right: 10px;
   text-align: center;
   font-size: 14px;
   img {
