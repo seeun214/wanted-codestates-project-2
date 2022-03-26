@@ -1,8 +1,16 @@
 import { configureStore } from '@reduxjs/toolkit';
-import userDataReducer from './reducers/userDataReducer';
+import allMatchListReducer from './reducers/allMatchListReducer';
+import matchDetailReducer from './reducers/matchDetailReducer';
+import matchListReducer from './reducers/matchListReducer';
 
 export const store = configureStore({
   reducer: {
-    data: userDataReducer,
+    matchList: matchListReducer,
+    matchAllList: allMatchListReducer,
+    matchDetail: matchDetailReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });

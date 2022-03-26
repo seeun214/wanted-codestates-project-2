@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 
 export const reset = css`
   html,
-  body,
   div,
   span,
   applet,
@@ -91,6 +90,13 @@ export const reset = css`
   }
   * {
     box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: Noto Sans KR;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: -1px;
   }
 
   article,
