@@ -36,6 +36,7 @@ const Comment = ({ id = null }) => {
   const handleInputChange = (e) => {
     setInputMessage({ ...inputMessage, [e.target.name]: e.target.value });
   };
+  console.log(inputMessage);
 
   //firebase db에서 message 가져오기
   useEffect(() => {
@@ -94,7 +95,6 @@ const Comment = ({ id = null }) => {
           ))}
         </MessageList>
       </MessageContainer>
-
       <Bottom>
         <InputMessage>
           <Input
@@ -114,7 +114,14 @@ const Comment = ({ id = null }) => {
             onChange={handleInputChange}
             value={inputMessage.content}
           />
-          <Button type="button" onClick={handleSubmit}>
+          <Button
+            type="button"
+            onClick={handleSubmit}
+            disabled={
+              inputMessage.nickName.length < 2 ||
+              inputMessage.content.length < 2
+            }
+          >
             남기기
           </Button>
         </InputMessage>
@@ -217,4 +224,18 @@ const Button = styled.button`
   background-color: #ccc;
   color: #fff;
   border-radius: 5px;
+  :enabled {
+    flex: 0.5;
+    vertical-align: middle;
+    width: 15%;
+    border: 1px solid #07f;
+    background-color: transparent;
+    border-radius: 5px;
+    color: #07f;
+    font-family: Noto Sans KR;
+  }
+  :enabled:hover {
+    background-color: #07f;
+    color: #fff;
+  }
 `;
