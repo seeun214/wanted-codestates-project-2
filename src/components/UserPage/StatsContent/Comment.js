@@ -36,7 +36,6 @@ const Comment = ({ id = null }) => {
   const handleInputChange = (e) => {
     setInputMessage({ ...inputMessage, [e.target.name]: e.target.value });
   };
-  console.log(inputMessage);
 
   //firebase db에서 message 가져오기
   useEffect(() => {

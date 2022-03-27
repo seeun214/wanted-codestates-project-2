@@ -185,6 +185,7 @@ const GraphWrap = styled.div`
 `;
 
 const TableWrapper = styled.ul`
+  overflow-x: hidden;
   overflow-y: auto;
   height: 235px;
   text-align: center;

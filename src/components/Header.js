@@ -25,14 +25,16 @@ const Header = () => {
       <HeaderSection>
         <Inner>
           <TabWrap>
-            <Link to="/">
-              <Tab>홈</Tab>
-            </Link>
-            <Link to="/rank">
-              <Tab>랭킹</Tab>
-            </Link>
-            <Tab>카트</Tab>
-            <Tab>트랙</Tab>
+            <TabList>
+              <Link to="/">
+                <Tab>홈</Tab>
+              </Link>
+              <Link to="/rank">
+                <Tab>랭킹</Tab>
+              </Link>
+              <Tab>카트</Tab>
+              <Tab>트랙</Tab>
+            </TabList>
           </TabWrap>
           <Search />
         </Inner>
@@ -101,11 +103,17 @@ const HeaderSection = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 8rem;
+  height: 55px;
   background-color: #005fcc;
 `;
 
 const TabWrap = styled.div`
+  display: inline-block;
+  line-height: 55px;
+  font-size: 14px;
+  font-weight: 400;
+`;
+const TabList = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -116,16 +124,33 @@ const TabWrap = styled.div`
 
 const Tab = styled.div`
   position: relative;
-  display: flex;
-  align-items: center;
+  text-align: center;
   box-sizing: border-box;
-  padding: 0 2rem;
-  height: 4rem;
-  color: #ffffff;
+  width: 80px;
+  height: 52px;
+  margin: 0 18px;
+  color: #fff;
   opacity: 0.5;
   :hover {
-    color: #ffffff;
+    color: #fff;
     cursor: pointer;
     opacity: 1;
+    ::after {
+      content: '';
+      position: absolute;
+      bottom: 0px;
+      left: 0px;
+      width: 100%;
+      border-bottom: 4px solid #fff;
+    }
+  }
+  ::after {
+    content: '';
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 0%;
+    border-bottom: 4px solid #ffffff;
+    transition: 0.3s;
   }
 `;
