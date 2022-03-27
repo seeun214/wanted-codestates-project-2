@@ -64,7 +64,6 @@ const TableHead = styled.thead`
 `;
 
 const Th = styled.th`
-  position: relative;
   font-weight: bold;
   font-size: 13px;
   :not(:last-child)::after {
@@ -83,7 +82,6 @@ const Tbody = styled.tbody``;
 
 const Tr = styled.tr`
   box-sizing: border-box;
-  width: 378px;
   line-height: 35px;
   text-align: center;
 
@@ -94,7 +92,7 @@ const Tr = styled.tr`
 
 const Td = styled.td`
   line-height: 45px;
-  padding-left: 12px;
+  padding-left: 11px;
   padding-right: 10px;
   text-align: center;
   font-size: 14px;
