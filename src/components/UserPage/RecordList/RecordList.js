@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import React, { useEffect } from 'react';
+import React from 'react';
 import TrackMetaData from '../../../assets/track.json';
 import KartMetaData from '../../../assets/kart.json';
 import timeForToday from '../../../api/timeForToday';
@@ -11,11 +11,7 @@ const RecordList = ({ data }) => {
     trackName = TrackMetaData.find((el) => el.id === data.trackId);
     KartName = KartMetaData.find((el) => el.id === data.kart);
   }
-  // useEffect(() => {
-  //   if (data.matchRank === '0') {
 
-  //   }
-  // }, []);
   return (
     <ListContainer>
       <Section win={data.matchRank} retire={data.matchRetired}>

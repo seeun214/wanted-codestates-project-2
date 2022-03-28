@@ -22,22 +22,54 @@ export const RankerContent = styled.div`
   box-shadow: 5px 5px 5px -5px rgb(0 0 0 / 21%);
 `;
 
-export const SelectButton = styled.button`
+export const MatchButton = styled.button`
+  cursor: pointer;
   border-width: ${(props) => props.borderWidth};
   border-radius: ${(props) => props.borderRadius};
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
+  color: ${(props) => (props.matchType === 'solo' ? '#fff' : '#07f')};
+  background: ${(props) =>
+    props.matchType === 'solo' ? '#07f' : 'transparent'};
   vertical-align: middle;
   display: inline-block;
   margin-top: 20px;
-  width: ${(props) => props.width};
-  height: ${(props) => props.height};
   line-height: 25px;
   font-size: 12px;
   font-weight: 400;
   text-align: center;
   border-style: solid;
   border-color: #07f;
-  border-color: ${(props) => (props.color ? props.color : '#07f')};
-  background: transparent;
+  :hover {
+    cursor: pointer;
+    color: ${(props) => '#fff'};
+    background: ${(props) => '#07f'};
+  }
+`;
+
+export const TeamButton = styled.button`
+  cursor: pointer;
+  border-width: ${(props) => props.borderWidth};
+  border-radius: ${(props) => props.borderRadius};
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
+  color: ${(props) => (props.matchType === 'team' ? '#fff' : '#07f')};
+  background: ${(props) =>
+    props.matchType === 'team' ? '#07f' : 'transparent'};
+  vertical-align: middle;
+  display: inline-block;
+  margin-top: 20px;
+  line-height: 25px;
+  font-size: 12px;
+  font-weight: 400;
+  text-align: center;
+  border-style: solid;
+  border-color: #07f;
+  :hover {
+    cursor: pointer;
+    color: ${(props) => '#fff'};
+    background: ${(props) => '#07f'};
+  }
 `;
 
 export const ActionButton = styled.button`

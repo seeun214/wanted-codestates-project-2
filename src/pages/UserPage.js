@@ -18,9 +18,12 @@ import Loading from '../components/Loading';
 const UserPage = () => {
   const soloType =
     '7b9f0fd5377c38514dbb78ebe63ac6c3b81009d5a31dd569d1cff8f005aa881a';
-  const [nickName, setNickName] = useState('BBEESSTT');
-  const [matchType, setMatchType] = useState(soloType);
+  const teamType =
+    'effd66758144a29868663aa50e85d3d95c5bc0147d7fdb9802691c2087f3416e';
   const { data, loading, error } = useSelector((state) => state.matchList);
+  const [nickName, setNickName] = useState('BBEESSTT');
+  const [matchType, setMatchType] = useState('solo');
+  const [matchCode, setMatchCode] = useState('');
   const dispatch = useDispatch();
   const params = useParams();
 
@@ -28,17 +31,25 @@ const UserPage = () => {
   useEffect(() => {
     dispatch(
       getUserMatchList({
-        nickName: nickName,
-        matchType,
+        nickName,
+        matchCode,
       }),
     );
-  }, [matchType, nickName, dispatch]);
+  }, [matchCode, nickName, dispatch]);
 
   useEffect(() => {
     if (params.id) {
       setNickName(params.id);
     }
   }, [params.id]);
+
+  useEffect(() => {
+    if (matchType === 'solo') {
+      setMatchCode(soloType);
+    } else {
+      setMatchCode(teamType);
+    }
+  }, [matchType]);
 
   return loading ? (
     <Loading />
@@ -55,7 +66,7 @@ const UserPage = () => {
           matchType={matchType}
           setMatchType={setMatchType}
         />
-        <Banner nickName={data?.nickName} />
+        <Banner nickName={data.nickName} />
         <StatsWrap>
           <TotalRecord data={data.userMatch} />
           <RankTrend data={data.userMatch} />
@@ -64,7 +75,7 @@ const UserPage = () => {
         <Tab />
         <InfoWrap>
           <RecordTableWrap>
-            <RecordTable userMatchdata={data.userMatch} matchType={matchType} />
+            <RecordTable userMatchdata={data.userMatch} />
           </RecordTableWrap>
 
           <RecordListWrap>
