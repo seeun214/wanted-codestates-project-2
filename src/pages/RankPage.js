@@ -1,6 +1,4 @@
-import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
-import { keyboard } from '@testing-library/user-event/dist/keyboard';
 import React from 'react';
 import RankList from '../components/RankPage/RankList';
 import TopContent from '../components/RankPage/TopContent';

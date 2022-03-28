@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 import React from 'react';
 import CircleChart from '../Chart/CircleChart';
-import { Title } from '../UserPage/StatsContent/TotalRecord';
 
 const TopRanker = ({ medalImg, marginLeft }) => {
   return (
@@ -64,20 +63,27 @@ const MedalImg = styled.img`
 `;
 
 const UserInfo = styled.div`
-  box-sizing: border-box;
-  padding: 37px 0px 20px 40px;
+  padding-top: 37px;
+  padding-bottom: 20px;
+  padding-left: 40px;
   border-radius: 10px;
   background-image: url('https://tmi.nexon.com/img/background_flag_w.png');
   background-size: cover;
-  background-position: 50%;
+  background-position: 80%;
 `;
 
 const Nick = styled.div`
   margin-bottom: 13px;
+  vertical-align: middle;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 700;
+  color: #07f;
 `;
 
 const SubInfo = styled.div`
-  font-size: 14px;
+  font-size: 15px;
+  margin-bottom: 5px;
 `;
 
 const BoldText = styled.span`

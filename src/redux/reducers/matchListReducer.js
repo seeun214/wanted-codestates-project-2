@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, current } from '@reduxjs/toolkit';
 import customAxios from '../../api/customAxios';
 
 const initialState = {
@@ -10,11 +10,11 @@ const initialState = {
 //유저의 매치 리스트(개인, 팀)
 export const getUserMatchList = createAsyncThunk(
   'data/userMatchList',
-  async ({ nickName, matchType }) => {
+  async ({ nickName, matchCode }) => {
     const res = await customAxios.get(`users/nickname/${nickName}`);
 
     const matchList = await customAxios.get(
-      `users/${res.data.accessId}/matches?start_date=&end_date= &offset=0&limit=200&match_types=${matchType}`,
+      `users/${res.data.accessId}/matches?start_date=&end_date= &offset=0&limit=200&match_types=${matchCode}`,
     );
     return matchList;
   },

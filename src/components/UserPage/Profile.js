@@ -29,7 +29,10 @@ const Profile = ({ nickName, character, matchType, setMatchType }) => {
             ></img>
           </h1>
           <TeamSelect>
-            <TeamSelectButton />
+            <TeamSelectButton
+              matchType={matchType}
+              setMatchType={setMatchType}
+            />
           </TeamSelect>
           <UserAction>
             <ActionButton>

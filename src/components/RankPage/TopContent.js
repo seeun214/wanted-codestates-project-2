@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import React from 'react';
-import { SelectButton } from '../../styles/styles';
+import { MatchButton } from '../../styles/styles';
 import TeamSelectButton from '../TeamSelectButton';
 
 const TopContent = () => {
@@ -20,7 +20,7 @@ const TopContent = () => {
       <GuideButton>랭킹가이드</GuideButton>
       <ButtonsWrap>
         <SpeedSelect>
-          <SelectButton
+          <MatchButton
             borderWidth={'0.7px 0 0.7px 0.7px'}
             borderRadius={'5px 0 0 5px'}
             width={'36px'}
@@ -28,8 +28,8 @@ const TopContent = () => {
             color={'#fff'}
           >
             통합
-          </SelectButton>
-          <SelectButton
+          </MatchButton>
+          <MatchButton
             borderWidth={'0.7px'}
             borderRadius={'0'}
             width={'36px'}
@@ -37,8 +37,8 @@ const TopContent = () => {
             color={'#fff'}
           >
             매빠
-          </SelectButton>
-          <SelectButton
+          </MatchButton>
+          <MatchButton
             borderWidth={'0.7px 0.7px 0.7px 0px'}
             borderRadius={'0 5px 5px 0'}
             width={'36px'}
@@ -46,10 +46,10 @@ const TopContent = () => {
             color={'#fff'}
           >
             무부
-          </SelectButton>
+          </MatchButton>
         </SpeedSelect>
         <TeamSelect>
-          <TeamSelectButton color={'#fff'} />
+          <TeamSelectButton />
         </TeamSelect>
       </ButtonsWrap>
     </Container>
