@@ -38,10 +38,12 @@ const UserPage = () => {
   }, [matchCode, nickName, dispatch]);
 
   useEffect(() => {
-    if (params.id) {
-      setNickName(params.id);
+    if (params.nick) {
+      setNickName(params.nick);
     }
-  }, [params.id]);
+  }, [params.nick]);
+
+  console.log(params.nick);
 
   useEffect(() => {
     if (matchType === 'solo') {

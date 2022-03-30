@@ -2,21 +2,32 @@ import styled from '@emotion/styled';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Search = () => {
-  const [inputNickname, setInputNickname] = useState('');
+  const [input, setInput] = useState('');
 
   const handleSubmit = (e) => {
-    e.prventDefault();
-    Navigate(`/user/${inputNickname}&matchType=indi`);
-    setInputNickname('');
+    // history.push(`/${input}`);
+    setInput('');
+  };
+
+  const onchangeValue = (e) => {
+    const { value } = e.target;
+    setInput(value);
   };
 
   return (
     <SearchContainer onSubmit={handleSubmit}>
-      <input type="text" placeholder="닉네임 검색" />
-      <FontAwesomeIcon onClick={handleSubmit} icon={faMagnifyingGlass} />
+      <input
+        type="text"
+        input={input}
+        placeholder="닉네임 검색"
+        onChange={onchangeValue}
+      />
+      <Link to={`/${input}`}>
+        <FontAwesomeIcon onClick={handleSubmit} icon={faMagnifyingGlass} />
+      </Link>
     </SearchContainer>
   );
 };
@@ -26,17 +37,11 @@ export default Search;
 const SearchContainer = styled.form`
   position: absolute;
   top: 0;
-  right: 5px;
+  right: 15px;
   width: 220px;
   height: 80%;
-  border-bottom: 1px solid #fff;
-  opacity: ${({ text }) => {
-    return text ? '1' : '0.5';
-  }};
-  transition: 0.5s;
-  :hover {
-    opacity: 1;
-  }
+  line-height: 55px;
+
   input {
     width: 195px;
     height: 32px;
@@ -47,17 +52,22 @@ const SearchContainer = styled.form`
     outline: 0;
     color: #fff;
     border: none;
-
+    border-bottom: 1px solid #fff;
     opacity: 0.5;
+    font-family: Noto Sans KR;
     transition: 0.3s ease;
+    :hover {
+      opacity: 1;
+    }
   }
   svg {
     position: absolute;
     font-size: 14px;
     top: 15px;
-    right: 5;
+    right: 35px;
     color: #fff;
     opacity: 0.5;
     transition: 0.3s ease;
+    cursor: pointer;
   }
 `;

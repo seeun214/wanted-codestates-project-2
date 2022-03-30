@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { Route, Routes } from 'react-router-dom';
 import Footer from './components/Footer';
 import Header from './components/Header';
+import HomePage from './pages/HomePage';
 import RankPage from './pages/RankPage';
 import UserPage from './pages/UserPage';
 import { reset } from './styles/reset';
@@ -13,7 +14,8 @@ function App() {
       <Global styles={reset} />
       <Header />
       <Routes>
-        <Route path="/" element={<UserPage />} />{' '}
+        <Route path="/" element={<HomePage />} />
+        <Route path="/user/:nick" element={<UserPage />} />
         <Route path="/rank" element={<RankPage />} />
       </Routes>
       <Footer />
