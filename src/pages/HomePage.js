@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import React from 'react';
+import SearchForm from '../components/HomePage/SearchForm';
 
 const HomePage = () => {
   return (
@@ -20,15 +21,7 @@ const HomePage = () => {
             <MainCopy>
               <Message>사 회 적 거 리 두 기</Message>
             </MainCopy>
-            <SerchForm>
-              <Select>
-                <Label>유저</Label>
-              </Select>
-              <Input></Input>
-              <Button>
-                <ButtonImg></ButtonImg>
-              </Button>
-            </SerchForm>
+            <SearchForm />
           </MainMessage>
         </HomeTitle>
 
@@ -102,26 +95,6 @@ const Message = styled.p`
   font-size: 18px;
   font-weight: 400;
 `;
-
-const SerchForm = styled.div`
-  position: relative;
-  width: 670px;
-  height: 67px;
-  background: transparent;
-  border: 4px solid #fff;
-  border-radius: 33.5px;
-  margin: 50px auto;
-`;
-
-const Select = styled.div``;
-
-const Label = styled.div``;
-
-const Input = styled.input``;
-
-const Button = styled.button``;
-
-const ButtonImg = styled.img``;
 
 const LeftImg = styled.img`
   position: absolute;

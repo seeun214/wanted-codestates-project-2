@@ -2,13 +2,14 @@ import styled from '@emotion/styled';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Search = () => {
   const [input, setInput] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    // history.push(`/${input}`);
+  const handleSubmit = (input) => {
+    navigate(`/user/${input}`);
     setInput('');
   };
 
@@ -25,9 +26,10 @@ const Search = () => {
         placeholder="닉네임 검색"
         onChange={onchangeValue}
       />
-      <Link to={`/${input}`}>
-        <FontAwesomeIcon onClick={handleSubmit} icon={faMagnifyingGlass} />
-      </Link>
+      <FontAwesomeIcon
+        onClick={() => handleSubmit(input)}
+        icon={faMagnifyingGlass}
+      />
     </SearchContainer>
   );
 };
