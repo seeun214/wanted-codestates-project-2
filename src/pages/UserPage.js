@@ -21,29 +21,22 @@ const UserPage = () => {
   const teamType =
     'effd66758144a29868663aa50e85d3d95c5bc0147d7fdb9802691c2087f3416e';
   const { data, loading, error } = useSelector((state) => state.matchList);
-  const [nickName, setNickName] = useState('BBEESSTT');
+  const [nickName, setNickName] = useState('');
   const [matchType, setMatchType] = useState('solo');
   const [matchCode, setMatchCode] = useState('');
   const dispatch = useDispatch();
   const params = useParams();
 
   console.log(data);
+
   useEffect(() => {
     dispatch(
       getUserMatchList({
-        nickName,
+        nickName: params.nick,
         matchCode,
       }),
     );
-  }, [matchCode, nickName, dispatch]);
-
-  useEffect(() => {
-    if (params.nick) {
-      setNickName(params.nick);
-    }
-  }, [params.nick]);
-
-  console.log(params.nick);
+  }, [matchCode, nickName, dispatch, params.nick]);
 
   useEffect(() => {
     if (matchType === 'solo') {

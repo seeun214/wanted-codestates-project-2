@@ -18,11 +18,19 @@ const Search = () => {
     setInput(value);
   };
 
+  const onKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSubmit(input);
+    }
+  };
+
   return (
-    <SearchContainer onSubmit={handleSubmit}>
+    <SearchContainer>
       <input
+        onKeyPress={onKeyPress}
         type="text"
         input={input}
+        value={input}
         placeholder="닉네임 검색"
         onChange={onchangeValue}
       />
