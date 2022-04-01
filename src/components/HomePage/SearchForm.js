@@ -7,7 +7,7 @@ const SearchForm = () => {
   const navigate = useNavigate();
 
   const handleSubmit = (input) => {
-    if (input !== null) {
+    if (input.length === 0) {
       alert('검색어를 입력해주세요');
     } else {
       navigate(`/user/${input}`);
