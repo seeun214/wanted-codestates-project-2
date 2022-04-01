@@ -1,13 +1,46 @@
 import styled from '@emotion/styled';
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const SearchForm = () => {
+  const [input, setInput] = useState('');
+  const navigate = useNavigate();
+
+  const handleSubmit = (input) => {
+    if (input !== null) {
+      alert('검색어를 입력해주세요');
+    } else {
+      navigate(`/user/${input}`);
+      setInput('');
+    }
+  };
+
+  const onchangeValue = (e) => {
+    const { value } = e.target;
+    setInput(value);
+  };
+
+  const onKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSubmit(input);
+    }
+  };
+
   return (
     <SerchForm>
       <Label>유저</Label>
-      <NickInput type="text" placeholder="카트라이더 닉네임을 입력"></NickInput>
-      <Button>
-        <ButtonImg></ButtonImg>
+      <input
+        type="text"
+        onChange={onchangeValue}
+        onKeyPress={onKeyPress}
+        value={input}
+        placeholder="카트라이더 닉네임을 입력"
+      />
+      <Button onClick={() => handleSubmit(input)}>
+        <ButtonImg
+          alt="Tmi"
+          src="https://tmi.nexon.com/img/assets/tmi_logo_default.svg"
+        ></ButtonImg>
       </Button>
     </SerchForm>
   );
@@ -22,6 +55,29 @@ const SerchForm = styled.div`
   border: 4px solid #fff;
   border-radius: 33.5px;
   margin: 50px auto;
+  input {
+    position: absolute;
+    top: 7px;
+    left: 105px;
+    width: 600px;
+    height: 44px;
+    line-height: 44px;
+    outline: 0;
+    border: 0;
+    display: block;
+    font-size: 24px;
+    font-weight: 400;
+    padding: 0 25px;
+    color: #fff;
+    background: transparent;
+    opacity: 0.5;
+    :focus {
+      opacity: 1;
+    }
+    ::placeholder {
+      color: #fff;
+    }
+  }
 `;
 
 const Label = styled.div`
@@ -47,25 +103,6 @@ const Label = styled.div`
     border-right: 5px solid transparent;
     border-top: 5px solid #fff;
   }
-`;
-
-const NickInput = styled.input`
-  position: absolute;
-  top: 7px;
-  left: 105px;
-  width: 600px;
-  height: 44px;
-  line-height: 44px;
-  outline: 0;
-  border: 0;
-  display: block;
-  font-size: 24px;
-  font-weight: 400;
-  padding: 0 25px;
-  color: #fff;
-  background: transparent;
-  opacity: 1;
-  transition: opacity 0.5s;
 `;
 
 const Button = styled.button`

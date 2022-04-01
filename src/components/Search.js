@@ -66,8 +66,11 @@ const SearchContainer = styled.form`
     opacity: 0.5;
     font-family: Noto Sans KR;
     transition: 0.3s ease;
-    :hover {
+    :focus {
       opacity: 1;
+    }
+    ::placeholder {
+      color: #fff;
     }
   }
   svg {
