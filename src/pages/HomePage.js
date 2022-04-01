@@ -41,6 +41,7 @@ const HomeContainer = styled.div`
   flex-direction: column;
   background-image: url(https://tmi.nexon.com/img/main_bg1.png);
   height: 696px;
+  background-size: cover;
 `;
 
 const Inner = styled.div`
@@ -114,7 +115,7 @@ const RightImg = styled.img`
   right: 0;
   z-index: 87;
   margin-right: -200px;
-  transition: all 0.5s;
+  transition: all 0.5s ease-in-out;
   z-index: 1;
 `;
 

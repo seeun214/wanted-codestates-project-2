@@ -27,7 +27,7 @@ const UserPage = () => {
   const dispatch = useDispatch();
   const params = useParams();
 
-  console.log(data);
+  console.log(data.length);
 
   useEffect(() => {
     dispatch(
